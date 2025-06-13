@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payne Ink Birthday Bash!</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Dark background for a tattoo shop vibe */
+            color: #e0e0e0; /* Light grey text */
+        }
+        /* Custom styles for glowing effect on certain elements */
+        .glow-text {
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.7); /* Cyan glow */
+        }
+        .glow-border {
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.7); /* Purple glow */
+        }
+        /* Classes for dynamic visibility */
+        .hidden-clue {
+            display: none; /* Used for toggling clues within active sections or hiding a clue explicitly */
+        }
+        .initial-hidden {
+            display: none; /* Used to hide entire clue sections before countdown expires */
+        }
+        /* Style for loading indicator */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="max-w-4xl w-full bg-gray-800 rounded-xl shadow-2xl overflow-hidden glow-border p-6 md:p-10 my-8">
+
+        <!-- Countdown Timer Section -->
+        <div id="countdownContainer" class="text-center mb-8">
+            <h3 class="text-3xl md:text-4xl font-bold text-teal-300 mb-4">Party Countdown!</h3>
+            <p id="countdownDisplay" class="text-5xl md:text-6xl font-extrabold text-white glow-text"></p>
+            <p class="text-lg text-gray-300 mt-2">Get ready for the Payne Ink Birthday Bash...</p>
+        </div>
+
+        <!-- Header Section (Always visible) -->
+        <header class="text-center mb-8">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-2 glow-text">
+                Payne Ink
+            </h1>
+            <h2 class="text-3xl md:text-4xl font-semibold text-purple-400 mb-4">
+                Kailey & Zak's Birthday Bash!
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300">
+                You're invited to the hottest party of the year!
+            </p>
+        </header>
+
+        <!-- Party Details Section (Always visible) -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Event Details</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+                <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                    <p><span class="font-semibold text-purple-300">Date:</span> June 21st</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                    <p><span class="font-semibold text-purple-300">Time:</span> 7:00 PM 'til late!</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                    <p><span class="font-semibold text-purple-300">Location:</span> Payne Ink Tattoo Studio</p>
+                    <p class="text-sm text-gray-400">242 Summit Dr, Mocksville</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg shadow-inner">
+                    <p><span class="font-semibold text-purple-300">Dress Code:</span> Flashy, Fun, and Ready to Ink!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attractions Section (Always visible) -->
+        <section class="mb-10">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 text-center mb-4">What's Happening?</h3>
+            <ul class="list-disc list-inside text-lg text-gray-300 space-y-2 px-4 md:px-0">
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live Tattoo Design Contest (Guest Judge: Tatiana Vale!)</li>
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Blacklight Ink Demos</li>
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live DJ spinning beats all night</li>
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Piercing Booths & Custom Flash Art</li>
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Delicious Snacks & Refreshments</li>
+            </ul>
+        </section>
+
+        <!-- Special Message / Hidden Clue Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">A Note From the Birthday Stars!</h3>
+            <!-- Placeholder for before game start -->
+            <div id="specialMessagePlaceholder" class="p-6 rounded-lg bg-gray-700 text-purple-300 text-lg">
+                Clues available at game start.
+            </div>
+            <!-- Actual content, initially hidden -->
+            <div id="specialMessageActualContent" class="initial-hidden">
+                <p class="text-lg text-gray-300 mb-6 bg-gray-700 p-6 rounded-lg shadow-inner cursor-pointer hover:bg-gray-600 transition duration-300 ease-in-out" onclick="toggleClue('specialMessageClue')">
+                    Click here for a special message from Kailey & Zak!
+                </p>
+                <div id="specialMessageClue" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-purple-500">
+                    <p class="text-xl text-white font-medium mb-4">
+                        "Hey everyone! So excited you're here. We've poured our hearts into this party, especially the contest. Just a little heads-up though, we heard a rumor about some tension around previous design submissions... hopefully, it's nothing to worry about. Let's just focus on celebrating and having a good time!"
+                    </p>
+                    <!-- HIDDEN CLUE 1: Reference to "previous design submissions" hinting at plagiarism -->
+                    <p class="text-sm text-gray-400">
+                        <span class="font-bold text-red-400">Hidden Insight:</span> *The buzz around the shop has been intense. Someone mentioned seeing a familiar phoenix design from the 'Rising Stars' 2022 contest pop up again recently. Odd, right?*
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guestbook Section - Now interactive immediately, but with hidden clue -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Party Guestbook</h3>
+            <div id="guestbookContent" class="bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-cyan-500 text-left">
+                <div id="authStatus" class="text-sm text-gray-400 mb-4">
+                    Authenticating... <span class="loader"></span>
+                </div>
+                <div class="mb-6 p-4 bg-gray-800 rounded-md">
+                    <p class="text-xl text-white font-medium mb-4">Leave a message:</p>
+                    <input type="text" id="guestbookName" placeholder="Your Name" tabindex="0"
+                           class="w-full px-4 py-2 mb-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400" maxlength="50">
+                    <textarea id="guestbookMessage" placeholder="Your message..." rows="4" tabindex="0"
+                              class="w-full px-4 py-2 mb-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400" maxlength="200"></textarea>
+                    <button onclick="addGuestbookEntry()" id="signButton"
+                            class="w-full px-6 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-lg hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Sign Guestbook <span id="signLoader" class="hidden loader"></span>
+                    </button>
+                    <p id="guestbookMessageStatus" class="text-sm mt-2 hidden-clue"></p>
+                </div>
+
+                <p class="text-xl text-white font-medium mb-4">Recent Entries:</p>
+                <ul id="guestbookEntries" class="text-left text-gray-300 space-y-3">
+                    <!-- Guestbook entries will be loaded here dynamically from Firestore -->
+                    <!-- HIDDEN CLUE 2: Donovan's partial recollection hinting at the gloved person - now with initial-hidden -->
+                    <li id="donovanClue" class="bg-gray-800 p-3 rounded-md border-l-4 border-red-500 initial-hidden">
+                        <span class="font-semibold text-red-300">Hidden Entry:</span> <span class="text-sm italic text-gray-400">"Just a brief moment, but I distinctly saw a pair of gloved hands near the ink supplies before Tatiana arrived. Very quick."</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Password Protected Clue Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Secret Artist's Archive</h3>
+            <!-- Placeholder for before game start -->
+            <div id="secretArchivePlaceholder" class="p-6 rounded-lg bg-gray-700 text-yellow-300 text-lg">
+                Access to the archive is granted at game start.
+            </div>
+            <!-- Actual content, initially hidden -->
+            <div id="secretArchiveActualContent" class="initial-hidden">
+                <p class="text-lg text-gray-300 mb-4">
+                    Enter the password to access some deeply buried studio notes.
+                </p>
+                <div class="flex flex-col items-center">
+                    <input type="password" id="passwordInput" placeholder="Enter password"
+                           class="px-4 py-2 mb-4 rounded-lg bg-gray-700 text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 w-full max-w-xs">
+                    <button onclick="checkPassword()"
+                            class="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Unlock Archive
+                    </button>
+                </div>
+                <div id="secretClue" class="hidden-clue bg-gray-700 p-6 mt-6 rounded-lg shadow-lg border-2 border-yellow-500 text-left">
+                    <p class="text-xl text-white font-medium mb-4">Archived Studio Notes & Personal Observations:</p>
+                    <ul class="list-disc list-inside text-lg text-gray-300 space-y-3 pl-4">
+                        <!-- HIDDEN CLUE 3.1: Solvent Note -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-yellow-500">
+                            <span class="font-semibold text-yellow-300">Studio Policy (circa 2024):</span> "Reminder to staff: Always ensure the ink room's *solvent cleaner* is securely locked away. It's potent and, if misused, could cause severe damage to equipment... or worse, to health. We keep a large supply in the back cabinet."
+                            <p class="text-sm italic text-gray-400 mt-2">
+                                Confidential Remark: *Some of the newer apprentices don't seem to grasp just how dangerous certain chemicals can be if mixed improperly. Needs stricter oversight.*
+                            </p>
+                        </li>
+                        <!-- HIDDEN CLUE 3.2: Lilly's struggle/mentor's observation -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-orange-500">
+                            <span class="font-semibold text-orange-300">Mentor's Note (Recent):</span> "Lilly's been under a lot of pressure lately. Her initial designs were great, but she hit a wall on her contest piece. Then, suddenly, she had this *perfect* phoenix. Too perfect, almost. I hope she's not letting the pressure get to her in unhealthy ways."
+                        </li>
+                        <!-- HIDDEN CLUE 3.3: Tatiana's exposé methods -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-red-500">
+                            <span class="font-semibold text-red-300">Anonymous Observation:</span> "Tatiana Vale is ruthless. I heard she's already found someone here who's been passing off stolen work as their own. She prides herself on 'unmasking' fakes. It's only a matter of time before she makes a big announcement. Hope it doesn't sink the shop."
+                        </li>
+                    </ul>
+                </div>
+                <p id="passwordError" class="text-red-500 mt-4 hidden-clue">Incorrect password. Please try again.</p>
+            </div>
+        </section>
+
+        <!-- Game Master Bypass Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-red-400 mb-4">Game Master Bypass</h3>
+            <p class="text-lg text-gray-300 mb-4">
+                Game Masters: Enter code to reveal clues early.
+            </p>
+            <div class="flex flex-col items-center">
+                <input type="password" id="gmPasswordInput" placeholder="GM Code"
+                       class="px-4 py-2 mb-4 rounded-lg bg-gray-700 text-white border border-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 w-full max-w-xs">
+                <button onclick="checkGameMasterPassword()"
+                        class="px-6 py-3 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                    Reveal Clues (GM Only)
+                </button>
+            </div>
+            <p id="gmPasswordError" class="text-red-500 mt-4 hidden-clue">Incorrect GM code.</p>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm mt-8">
+            &copy; 2025 Payne Ink. All rights reserved. Let the ink flow!
+        </footer>
+    </div>
+
+    <!-- Firebase SDK Imports -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables for Firebase instances and user info
+        let app;
+        let db;
+        let auth;
+        let currentUserId = 'anonymous'; // Default to anonymous
+
+        // Get Firebase configuration and app ID from the global environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        /**
+         * Initializes Firebase and authenticates the user.
+         * Sets up real-time listener for guestbook entries.
+         */
+        async function initializeFirebaseAndAuth() {
+            try {
+                // Initialize Firebase app if not already initialized
+                if (!app) {
+                    app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+                }
+
+                // Authenticate user
+                const authStatusElement = document.getElementById('authStatus');
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                    console.log("Signed in with custom token.");
+                } else {
+                    await signInAnonymously(auth);
+                    console.log("Signed in anonymously.");
+                }
+
+                // Listen for auth state changes to get current user ID
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUserId = user.uid;
+                        authStatusElement.innerHTML = `Authenticated as: <span class="font-bold text-teal-300">${currentUserId}</span>`;
+                        listenForGuestbookEntries(); // Start listening for guestbook entries
+                    } else {
+                        currentUserId = crypto.randomUUID(); // Fallback for unauthenticated or anonymous
+                        authStatusElement.innerHTML = `Not authenticated. Using temp ID: <span class="font-bold text-gray-400">${currentUserId}</span>`;
+                        listenForGuestbookEntries(); // Still try to listen
+                    }
+                    authStatusElement.querySelector('.loader')?.classList.add('hidden'); // Hide loader once authenticated
+                });
+
+            } catch (error) {
+                console.error("Error initializing Firebase or authenticating:", error);
+                const authStatusElement = document.getElementById('authStatus');
+                authStatusElement.innerHTML = `<span class="text-red-500">Auth Error: ${error.message}</span>`;
+                authStatusElement.querySelector('.loader')?.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Adds a new entry to the Firestore guestbook collection.
+         */
+        window.addGuestbookEntry = async function() {
+            const nameInput = document.getElementById('guestbookName');
+            const messageInput = document.getElementById('guestbookMessage');
+            const statusElement = document.getElementById('guestbookMessageStatus');
+            const signButton = document.getElementById('signButton');
+            const signLoader = document.getElementById('signLoader');
+
+            const name = nameInput.value.trim();
+            const message = messageInput.value.trim();
+
+            if (!name || !message) {
+                statusElement.textContent = "Please enter both your name and a message.";
+                statusElement.classList.remove('hidden-clue', 'text-green-500');
+                statusElement.classList.add('text-red-500');
+                return;
+            }
+
+            // Disable button and show loader
+            signButton.disabled = true;
+            signLoader.classList.remove('hidden');
+            statusElement.classList.add('hidden-clue'); // Hide previous status
+
+            try {
+                // Ensure auth is ready before attempting Firestore operation
+                if (!auth || !auth.currentUser) {
+                    console.error("Firebase Auth not ready. Cannot add guestbook entry.");
+                    statusElement.textContent = "Authentication not ready. Please wait and try again.";
+                    statusElement.classList.remove('hidden-clue', 'text-green-500');
+                    statusElement.classList.add('text-red-500');
+                    return;
+                }
+
+                // Public collection path for guestbook entries
+                const guestbookCollectionRef = collection(db, `artifacts/${appId}/public/data/guestbook`);
+
+                await addDoc(guestbookCollectionRef, {
+                    name: name,
+                    message: message,
+                    userId: currentUserId, // Store the user ID for reference
+                    timestamp: serverTimestamp() // Firestore timestamp
+                });
+
+                nameInput.value = ''; // Clear input fields
+                messageInput.value = '';
+                statusElement.textContent = "Message added successfully!";
+                statusElement.classList.remove('hidden-clue', 'text-red-500');
+                statusElement.classList.add('text-green-500');
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                statusElement.textContent = `Error adding message: ${e.message}`;
+                statusElement.classList.remove('hidden-clue', 'text-green-500');
+                statusElement.classList.add('text-red-500');
+            } finally {
+                signButton.disabled = false;
+                signLoader.classList.add('hidden');
+            }
+        };
+
+        /**
+         * Listens for real-time updates to guestbook entries and displays them.
+         */
+        function listenForGuestbookEntries() {
+            const guestbookEntriesList = document.getElementById('guestbookEntries');
+            const donovanClue = document.getElementById('donovanClue'); // Get the specific clue element
+
+            // Create a query against the collection, ordered by timestamp
+            const q = query(collection(db, `artifacts/${appId}/public/data/guestbook`), orderBy("timestamp", "desc"));
+
+            onSnapshot(q, (snapshot) => {
+                // Clear all existing entries except the static Donovan clue placeholder
+                // First, remove all dynamic entries
+                const currentEntries = Array.from(guestbookEntriesList.children);
+                currentEntries.forEach(child => {
+                    if (child.id !== 'donovanClue') { // Only remove if it's not the static Donovan clue
+                        guestbookEntriesList.removeChild(child);
+                    }
+                });
+
+                snapshot.forEach((doc) => {
+                    const entry = doc.data();
+                    const li = document.createElement('li');
+                    li.classList.add('bg-gray-800', 'p-3', 'rounded-md', 'border-l-4', 'border-blue-500'); // Use blue for user entries
+                    const timestamp = entry.timestamp ? new Date(entry.timestamp.seconds * 1000).toLocaleString() : 'N/A';
+                    li.innerHTML = `
+                        <span class="font-semibold text-blue-300">${entry.name}</span>
+                        <span class="text-xs text-gray-500"> (${timestamp})</span>:<br>
+                        ${entry.message}
+                    `;
+                    // Insert new entries *before* the Donovan clue if it exists, otherwise at the top
+                    if (donovanClue) {
+                        guestbookEntriesList.insertBefore(li, donovanClue);
+                    } else {
+                        guestbookEntriesList.prepend(li);
+                    }
+                });
+            }, (error) => {
+                console.error("Error fetching guestbook entries:", error);
+                const statusElement = document.getElementById('guestbookMessageStatus');
+                if (statusElement) {
+                    statusElement.textContent = `Failed to load entries: ${error.message}`;
+                    statusElement.classList.remove('hidden-clue', 'text-green-500');
+                    statusElement.classList.add('text-red-500');
+                }
+            });
+        }
+
+        // Countdown Logic
+        const countdownDate = new Date("June 21, 2025 19:00:00").getTime(); // June 21st, 2025, 7:00 PM (19:00 military time)
+
+        const countdownDisplay = document.getElementById('countdownDisplay');
+        const countdownContainer = document.getElementById('countdownContainer');
+
+        const specialMessagePlaceholder = document.getElementById('specialMessagePlaceholder');
+        const specialMessageActualContent = document.getElementById('specialMessageActualContent');
+
+        const secretArchivePlaceholder = document.getElementById('secretArchivePlaceholder');
+        const secretArchiveActualContent = document.getElementById('secretArchiveActualContent');
+
+        const donovanClue = document.getElementById('donovanClue'); // Get the specific Donovan clue
+
+
+        let countdownInterval; // To store the interval ID
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownContainer.innerHTML = '<h3 class="text-3xl md:text-4xl font-bold text-teal-300 mb-4">The Party Has Begun!</h3><p class="text-2xl font-semibold text-white glow-text">Let the Mystery Unfold!</p>';
+                revealAllClues();
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownDisplay.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function revealAllClues() {
+            // Hide all placeholders
+            specialMessagePlaceholder.classList.add('hidden-clue');
+            secretArchivePlaceholder.classList.add('hidden-clue');
+
+            // Show all actual content sections
+            specialMessageActualContent.classList.remove('initial-hidden');
+            secretArchiveActualContent.classList.remove('initial-hidden');
+
+            // Reveal the specific Donovan clue within the guestbook
+            if (donovanClue) {
+                donovanClue.classList.remove('initial-hidden');
+            }
+
+            // Re-initialize Firebase and auth for guestbook if it wasn't done due to content being hidden
+            // This ensures Firebase is fully ready when the guestbook section becomes visible.
+            // (Note: initializeFirebaseAndAuth is already called on window.onload, so this might be redundant
+            // for the guestbook itself, but it ensures *all* Firebase related elements are ready).
+            initializeFirebaseAndAuth();
+        }
+
+        // Universal window.onload handler
+        window.onload = function() {
+            // Initial check and start countdown
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+
+            // Initialize Firebase and auth immediately since guestbook is active from start
+            initializeFirebaseAndAuth();
+        };
+
+        // General JS for toggling other clues
+        window.toggleClue = function(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('hidden-clue')) {
+                element.classList.remove('hidden-clue');
+                element.classList.add('visible-clue');
+            } else {
+                element.classList.remove('visible-clue');
+                element.classList.add('hidden-clue');
+            }
+        };
+
+        // Function to check the password for the secret archive
+        window.checkPassword = function() {
+            const passwordInput = document.getElementById('passwordInput');
+            const secretClue = document.getElementById('secretClue');
+            const passwordError = document.getElementById('passwordError');
+            const correctPassword = "INKED"; // The secret password
+
+            if (passwordInput.value.toUpperCase() === correctPassword) {
+                secretClue.classList.remove('hidden-clue');
+                secretClue.classList.add('visible-clue');
+                passwordError.classList.add('hidden-clue'); // Hide error if successful
+            } else {
+                secretClue.classList.add('hidden-clue'); // Hide clue if incorrect
+                secretClue.classList.remove('visible-clue');
+                passwordError.classList.remove('hidden-clue'); // Show error
+            }
+        };
+
+        // Game Master Bypass function
+        window.checkGameMasterPassword = function() {
+            const gmPasswordInput = document.getElementById('gmPasswordInput');
+            const gmPasswordError = document.getElementById('gmPasswordError');
+            const correctGmPassword = "JUDGE"; // Game Master password
+
+            if (gmPasswordInput.value.toUpperCase() === correctGmPassword) {
+                clearInterval(countdownInterval); // Stop the countdown
+                countdownContainer.innerHTML = '<h3 class="text-3xl md:text-4xl font-bold text-teal-300 mb-4">GM Override Active!</h3><p class="text-2xl font-semibold text-white glow-text">Clues Revealed!</p>';
+                revealAllClues(); // Reveal all clues
+                gmPasswordError.classList.add('hidden-clue'); // Hide error
+            } else {
+                gmPasswordError.classList.remove('hidden-clue'); // Show error
+            }
+        };
+    </script>
+</body>
+</html>
