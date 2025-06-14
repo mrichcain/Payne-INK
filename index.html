@@ -134,11 +134,11 @@
                 </div>
                 <div class="mb-6 p-4 bg-gray-800 rounded-md">
                     <p class="text-xl text-white font-medium mb-4">Leave a message:</p>
-                    <input type="text" id="guestbookName" placeholder="Your Name" tabindex="0"
+                    <input type="text" id="guestbookName" placeholder="Your Name" tabindex="0" disabled
                            class="w-full px-4 py-2 mb-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400" maxlength="50">
-                    <textarea id="guestbookMessage" placeholder="Your message..." rows="4" tabindex="0"
+                    <textarea id="guestbookMessage" placeholder="Your message..." rows="4" tabindex="0" disabled
                               class="w-full px-4 py-2 mb-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400" maxlength="200"></textarea>
-                    <button onclick="addGuestbookEntry()" id="signButton"
+                    <button onclick="addGuestbookEntry()" id="signButton" disabled
                             class="w-full px-6 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-lg hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-105">
                         Sign Guestbook <span id="signLoader" class="hidden loader"></span>
                     </button>
@@ -266,6 +266,11 @@
 
                 // Authenticate user
                 const authStatusElement = document.getElementById('authStatus');
+                const nameInput = document.getElementById('guestbookName');
+                const messageInput = document.getElementById('guestbookMessage');
+                const signButton = document.getElementById('signButton');
+
+
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
                     console.log("Signed in with custom token.");
@@ -279,11 +284,19 @@
                     if (user) {
                         currentUserId = user.uid;
                         authStatusElement.innerHTML = `Authenticated as: <span class="font-bold text-teal-300">${currentUserId}</span>`;
+                        // Enable inputs and button once authenticated
+                        nameInput.disabled = false;
+                        messageInput.disabled = false;
+                        signButton.disabled = false;
                         listenForGuestbookEntries(); // Start listening for guestbook entries
                     } else {
                         currentUserId = crypto.randomUUID(); // Fallback for unauthenticated or anonymous
                         authStatusElement.innerHTML = `Not authenticated. Using temp ID: <span class="font-bold text-gray-400">${currentUserId}</span>`;
-                        listenForGuestbookEntries(); // Still try to listen
+                        // Keep inputs/button disabled if not authenticated (or using a temporary ID)
+                        nameInput.disabled = true;
+                        messageInput.disabled = true;
+                        signButton.disabled = true;
+                        listenForGuestbookEntries(); // Still try to listen, but writing will fail without auth
                     }
                     authStatusElement.querySelector('.loader')?.classList.add('hidden'); // Hide loader once authenticated
                 });
@@ -291,8 +304,16 @@
             } catch (error) {
                 console.error("Error initializing Firebase or authenticating:", error);
                 const authStatusElement = document.getElementById('authStatus');
+                const nameInput = document.getElementById('guestbookName');
+                const messageInput = document.getElementById('guestbookMessage');
+                const signButton = document.getElementById('signButton');
+
                 authStatusElement.innerHTML = `<span class="text-red-500">Auth Error: ${error.message}</span>`;
                 authStatusElement.querySelector('.loader')?.classList.add('hidden');
+                // Ensure inputs/button are disabled on error
+                nameInput.disabled = true;
+                messageInput.disabled = true;
+                signButton.disabled = true;
             }
         }
 
