@@ -95,10 +95,186 @@
             <ul class="list-disc list-inside text-lg text-gray-300 space-y-2 px-4 md:px-0">
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live Tattoo Design Contest (Guest Judge: Tatiana Vale!)</li>
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Blacklight Ink Demos</li>
-                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live DJ spinning beats all night</li>
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live DJ spinning beats all night <span class="text-sm text-gray-400">(DJ Melissa "The Rhythmic Regulator")</span></li>
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Piercing Booths & Custom Flash Art</li>
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Delicious Snacks & Refreshments</li>
             </ul>
+        </section>
+
+        <!-- New: Contest & Awards Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Contest & Awards Info!</h3>
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-purple-500">
+                <p class="text-lg text-gray-300 mb-4">
+                    Get ready to show off your creativity and flair!
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-300 space-y-3 px-4 md:px-0">
+                    <li class="p-2 rounded-lg shadow-inner bg-gray-800">
+                        <span class="font-semibold text-purple-300">Best Tattoo Design:</span> Bring your *original* tattoo design! It will be put up for a vote by all party-goers. The most innovative and captivating design wins!
+                    </li>
+                    <li class="p-2 rounded-lg shadow-inner bg-gray-800">
+                        <span class="font-semibold text-purple-300">Best Costume:</span> Come dressed to impress in your most flashy, fun, and ink-ready attire. Your fellow guests will vote for the most outstanding costume of the night!
+                    </li>
+                    <li class="p-2 rounded-lg shadow-inner bg-gray-800">
+                        <span class="font-semibold text-purple-300">Best Actor:</span> Show off your improv skills! The player who embodies their character most convincingly throughout the mystery will be crowned Best Actor.
+                    </li>
+                </ul>
+                <p class="text-lg text-gray-300 mt-4">
+                    Votes will be cast towards the end of the night. Good luck, and bring your A-game!
+                </p>
+            </div>
+        </section>
+
+        <!-- Player Character Cards Section (New) -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Your Character Card</h3>
+            <p class="text-lg text-gray-300 mb-4">
+                Enter your unique character password to reveal your role and secrets.
+            </p>
+            <div class="flex flex-col items-center">
+                <input type="password" id="characterPasswordInput" placeholder="Your Character Password"
+                       class="px-4 py-2 mb-4 rounded-lg bg-gray-700 text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 w-full max-w-xs">
+                <button onclick="unlockCharacterCard()"
+                        class="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105">
+                    Reveal My Card
+                </button>
+            </div>
+            <p id="characterPasswordError" class="text-red-500 mt-4 hidden-clue">Incorrect password for any character. Please try again.</p>
+
+            <!-- Individual Character Cards - Initially Hidden -->
+            <div id="characterCardsContainer" class="mt-8 text-left">
+
+                <!-- Kailey's Card -->
+                <div id="card_Kailey" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Kailey "The Birthday Artist"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Co-Birthday Celebrant, Aspiring Tattoo Artist</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Enthusiastic, creative, a bit competitive. Deeply passionate about her art. She seeks genuine artistic recognition and despises unoriginality.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** As a young artist, Kailey greatly admires Tatiana Vale and wants nothing more than to impress her with her original contest design. She hoped Tatiana's visit would be a huge break.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She has growing suspicions about certain "original" designs appearing in the contest, finding one strikingly similar to an early concept of **Lilly's "The Phoenix Plagiarist"** that she herself had helped critique.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Did she resent Tatiana's potential overlooking of her truly original work, or was she worried about *any* accusations of plagiarism (real or perceived) disrupting her big night, especially with Tatiana's reputation?</p>
+                </div>
+
+                <!-- Zak's Card -->
+                <div id="card_Zak" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Zak "The Shop Heartthrob"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Co-Birthday Celebrant, Tattoo Artist at Payne Ink</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Charismatic, a little rebellious, but fiercely protective of his friends and the shop's reputation. He carries a relaxed demeanor, but has a hidden past of shady dealings in the tattoo world.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Tatiana was known for exposing "rats" and shady dealings in shops, and Zak has some skeletons in his closet regarding past questionable ink supply sources that he's tried to put behind him. He feared Tatiana might dig them up.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He had a hushed, intense conversation with **James "The Business Brain"** earlier tonight about "cleaning up the shop's image" before Tatiana's judging.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** What past secret was Zak trying to keep hidden from the public eye and Tatiana's scrutinizing gaze? Would he go to great lengths to prevent its exposure, especially if it involved his business partner or mentor?</p>
+                </div>
+
+                <!-- Anne's Card -->
+                <div id="card_Anne" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Anne "The Shadowed Ink"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Longtime Friend of Kailey's, Tattoo Apprentice</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Quiet, observant, but fiercely protective of her professional reputation. She prefers to keep a low profile but can be surprisingly passionate when provoked.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Anne is well aware of Tatiana's investigative nature and fears she might uncover details about Anne's previous apprenticeships at other, less reputable shops, potentially impacting her current standing at Payne Ink.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She has a strained relationship with **Nate "The Steady Hand"**, stemming from a disagreement at a previous studio they both worked at, which involved a controversial design submission.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** What truly happened at Anne's previous shop that she's so desperate to keep hidden, and was she worried Tatiana would pick up on the scent through her investigations into local artists?</p>
+                </div>
+
+                <!-- Lilly's Card -->
+                <div id="card_Lilly" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Lilly "The Phoenix Plagiarist"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Young Apprentice at Payne Ink, Aspiring Designer</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Eager to please, talented, but easily overwhelmed by pressure and desperate for recognition. She once idolized Tatiana Vale and wants nothing more than to be a successful artist.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Tatiana had discovered Lilly submitted a stolen design in a *previous* contest and was planning to expose her during the party. This would have irrevocably ruined Lilly's career.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She's acutely aware of the heightened scrutiny on originality in the contest, partly due to the recent public feuds initiated by **Miranda "The Vlogging Victim"** over design ownership, which added immensely to Lilly's stress.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** She was desperate to avoid exposure and saw Tatiana as a direct, immediate threat to her entire future in the tattoo world. Her panic led to a tragic, unintended outcome.</p>
+                </div>
+
+                <!-- Aaliyah's Card -->
+                <div id="card_Aaliyah" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Aaliyah "The Crocheting Critic"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Party Guest, Aspiring Craft Influencer</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Enthusiastic about her unique craft-art, particularly crochet, but also a bit self-conscious and sensitive to criticism. She dreams of gaining wider recognition for her blend of traditional crafts and modern art.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Aaliyah follows Tatiana's work closely, hoping for a chance to gain exposure for her unique craft-art on the Inkspire Network. She views Tatiana as a gatekeeper to success but also fears her sharp critiques.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She's quietly resentful of **Kailey "The Birthday Artist's"** instant popularity and "flashy" style, feeling her own more nuanced art is overlooked by the mainstream tattoo world.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Was Aaliyah seeking to manipulate Tatiana's opinion for her own gain, or did a fear of negative judgment lead her to a desperate act?</p>
+                </div>
+
+                <!-- Lucas's Card -->
+                <div id="card_Lucas" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Lucas "The Digital Detective"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Party Guest, Tech Enthusiast / Amateur Hacker</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Curious, resourceful, often seen tinkering with gadgets and interested in digital secrets. Has a reputation for being a bit nosy when it comes to technology and online data.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Lucas is fascinated by internet culture and celebrity, particularly the mechanics of online influence. He sees Tatiana as a master of online information control and wants to understand her methods, perhaps even hoping to learn some "hacks" for his own digital projects.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He was found attempting to access a suspicious device near the crime scene, which he believed might contain vital digital information about *anyone* at the party. He later identifies it as **Miranda "The Vlogging Victim's"** phone.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** What forbidden information was Lucas trying to find on the device, and why was it so urgent that he risked being caught near a murder scene? Was it for personal gain, or did it relate to a larger secret affecting someone specific?</p>
+                </div>
+
+                <!-- James's Card -->
+                <div id="card_James" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: James "The Business Brain"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Shop Sponsor, Local Business Owner</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Professional, image-conscious, and easily frustrated by drama that could negatively impact his brand or investments. He values stability and good public relations above all else.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** James was excited about Tatiana's visit, seeing it as a great PR opportunity for Payne Ink. However, he was also extremely worried about any negative attention or scandals Tatiana might stir up related to the shop's operations or artists.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He had been pressuring **Zak "The Shop Heartthrob"** for weeks to "clean up any loose ends" and ensure the party went off without a hitch, fearing any hint of scandal could damage his substantial investment in Payne Ink.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** How far would James go to protect his investments and the shop's pristine public image from potential scandal initiated by Tatiana, especially if it involved individuals closely tied to the business?</p>
+                </div>
+
+                <!-- Carter's Card -->
+                <div id="card_Carter" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Carter "The Silent Security"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Security Guard Hired for the Party</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Stoic, by-the-book, and prides himself on his observational skills. However, he can sometimes be a little too detached, focusing on procedures over people and missing subtle human elements.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** His primary job was to ensure Tatiana's safety and the smooth running of the event. Her death directly reflects poorly on his professionalism and vigilance, and he fears repercussions.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He had a minor but noticeable disagreement with **Melissa "The Rhythmic Regulator"** earlier, as the loud music from the DJ booth made it difficult for him to monitor the entrance to the ink room effectively.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Was Carter truly oblivious to the murder, or is he deliberately hiding something about what he saw (or didn't see) that night to protect his reputation, or even to cover for someone else's oversight?</p>
+                </div>
+
+                <!-- Donovan's Card -->
+                <div id="card_Donovan" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Donovan "The Eyewitness"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Party Guest, Observant Bystander</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** A bit socially awkward, but highly observant. He tends to notice small, peculiar details that others often miss. He's earnest but might be easily intimidated or hesitant to share everything he knows.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Donovan admires Tatiana's work ethic and journalistic integrity, secretly hoping to catch a glimpse of her "investigative process" firsthand.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He claims he saw someone sneak into the ink room with gloves on, and explicitly states it was "definitely not Zak or Kailey," which raised **Carter's "The Silent Security"** eyebrows, as Carter himself didn't report seeing anyone suspicious.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Who did Donovan see enter the ink room, and why is he being so specific about who it *wasn't*? Is he afraid to name the real person, or does he genuinely only remember fragmented details, perhaps trying to protect someone indirectly?</p>
+                </div>
+
+                <!-- Miranda's Card -->
+                <div id="card_Miranda" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Miranda "The Vlogging Victim"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Local Influencer, Design Contest Finalist (Not the murder victim)</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Controversial, attention-seeking, and often confrontational. She believes in leveraging information and creating drama for views, frequently accusing others of perceived slights or unoriginality.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Miranda respected Tatiana as a fellow media personality and sought to impress her. However, she also saw Tatiana as a potential rival for influence and a potential target for a "shocking expose" of her own.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She was known for public feuds and threats, recently hinting in a vlog at having "leverage" that could "end a career" for "someone here tonight" and ominously stated, "They’ll wish they hadn’t crossed me." This has put **Zak**, **Anne**, and **Kailey** on edge, among others.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Who was Miranda planning to expose with her "leverage," and did her constant stirring of drama put her in danger, even though she wasn't the target of the poisoning? Her information might have put others at risk, and her recent online activity is highly suspicious.</p>
+                </div>
+
+                <!-- Dante's Card -->
+                <div id="card_Dante" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Dante "The Charismatic Client"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Regular Client, Tattoo Enthusiast</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Charming and persuasive, often tries to bend rules or get special treatment. He values quality art but doesn't take criticism well, especially when it's public, viewing it as a personal attack.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Dante had a very public run-in with Tatiana Vale. She had recently posted a scathing review of a tattoo he received from another artist she deemed "subpar," criticizing not just the artist but implicitly his taste and judgment as a collector.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He also has a long-standing, quiet rivalry with **Nate "The Steady Hand"**, arguing over the best techniques for specific styles of realism. He often seeks to prove himself superior.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Did Dante seek revenge for the public humiliation and damage to his "collector" reputation by silencing Tatiana, believing she had overstepped her bounds?</p>
+                </div>
+
+                <!-- Nate's Card -->
+                <div id="card_Nate" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Nate "The Steady Hand"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Part-Time Tattoo Artist at Payne Ink</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Calm, meticulous, and generally well-regarded for his steady work. He respects artistic integrity but believes public criticism should have boundaries, especially when it borders on bullying.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Nate admired Tatiana's influence but strongly disagreed with her "ruthless" expose methods, particularly when they harmed aspiring or lesser-known artists. He was recently heard discussing a "scathing review" by Tatiana that deeply affected a friend's career, and he felt it was a deeply unfair and cruel tactic.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He has a quiet professional rivalry with **Dante "The Charismatic Client"** regarding realism tattoo techniques, and also harbors a subtle disapproval of **Kailey's "The Birthday Artist"** occasional embrace of trending, less traditional styles for quick fame.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Was Nate driven by a sense of justice or loyalty to other artists to stop Tatiana's harsh critiques, feeling she abused her power?</p>
+                </div>
+
+                <!-- Melissa's Card -->
+                <div id="card_Melissa" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Melissa "The Rhythmic Regulator"</h4>
+                    <p class="text-lg text-gray-300 mb-1">**Role:** Studio Manager at Payne Ink & Party DJ</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Highly organized and detail-oriented, she keeps the studio running smoothly. On the side, she's a passionate DJ, bringing her organized nature to managing the music and observing the crowd from the booth.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Melissa was extremely anxious about Tatiana's visit, not just for the contest, but because she knew Tatiana's reputation for deep dives into shop operations. Melissa had recently discovered a significant, unexplained discrepancy in the **solvent cleaner** inventory – a large amount is missing – and she was terrified Tatiana would uncover this irregularity, making her look incompetent or worse. Her role as DJ meant she had access to the ink room for a moment during a track change and could have slipped in undetected.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She had a small but public squabble with **Carter "The Silent Security"** about the volume of the music interfering with his ability to monitor the ink room, making her frustrated.</p>
+                    <p class="text-lg text-gray-300">**Secret/Motive Hint:** Was Melissa desperate to prevent Tatiana from exposing the missing solvent, which could have been linked to illicit activities or simply made her look grossly negligent? Her access and the timing of the murder are highly suspicious.</p>
+                </div>
+
+            </div>
         </section>
 
         <!-- Special Message / Hidden Clue Section -->
@@ -250,6 +426,23 @@
         // No initial token needed, signInAnonymously will handle it for public access.
         const initialAuthToken = null;
 
+        // Character Card Passwords (Internal to the script)
+        const characterPasswords = {
+            "KAILEY": "card_Kailey",
+            "ZAK": "card_Zak",
+            "ANNE": "card_Anne",
+            "LILLY": "card_Lilly",
+            "AALIYAH": "card_Aaliyah",
+            "LUCAS": "card_Lucas",
+            "JAMES": "card_James",
+            "CARTER": "card_Carter",
+            "DONOVAN": "card_Donovan",
+            "MIRANDA": "card_Miranda",
+            "DANTE": "card_Dante",
+            "NATE": "card_Nate",
+            "MELISSA": "card_Melissa"
+        };
+
 
         /**
          * Initializes Firebase and authenticates the user.
@@ -264,7 +457,7 @@
                     auth = getAuth(app);
                 }
 
-                // Authenticate user
+                // Get guestbook elements
                 const authStatusElement = document.getElementById('authStatus');
                 const nameInput = document.getElementById('guestbookName');
                 const messageInput = document.getElementById('guestbookMessage');
@@ -290,13 +483,17 @@
                         signButton.disabled = false;
                         listenForGuestbookEntries(); // Start listening for guestbook entries
                     } else {
-                        currentUserId = crypto.randomUUID(); // Fallback for unauthenticated or anonymous
-                        authStatusElement.innerHTML = `Not authenticated. Using temp ID: <span class="font-bold text-gray-400">${currentUserId}</span>`;
-                        // Keep inputs/button disabled if not authenticated (or using a temporary ID)
+                        // This case generally means anonymous sign-in failed or user signed out.
+                        // For this app, we always want anonymous access if not a custom token user.
+                        currentUserId = crypto.randomUUID(); // Fallback to a temp ID for display
+                        authStatusElement.innerHTML = `<span class="text-red-500">Authentication Failed. Using a temporary ID.</span>`;
+                        console.error("Anonymous authentication failed or user signed out.");
+                        // Keep inputs/button disabled as writing won't work without proper auth
                         nameInput.disabled = true;
                         messageInput.disabled = true;
                         signButton.disabled = true;
-                        listenForGuestbookEntries(); // Still try to listen, but writing will fail without auth
+                        // Still try to listen for reads, though writes will fail
+                        listenForGuestbookEntries();
                     }
                     authStatusElement.querySelector('.loader')?.classList.add('hidden'); // Hide loader once authenticated
                 });
@@ -475,10 +672,6 @@
             if (donovanClue) {
                 donovanClue.classList.remove('initial-hidden');
             }
-
-            // Re-initialize Firebase and auth for guestbook if it wasn't done due to content being hidden
-            // This ensures Firebase is fully ready when the guestbook section becomes visible.
-            initializeFirebaseAndAuth();
         }
 
         // Universal window.onload handler
@@ -534,6 +727,35 @@
                 gmPasswordError.classList.add('hidden-clue'); // Hide error
             } else {
                 gmPasswordError.classList.remove('hidden-clue'); // Show error
+            }
+        };
+
+        // Function to unlock character cards
+        window.unlockCharacterCard = function() {
+            const charPasswordInput = document.getElementById('characterPasswordInput');
+            const charPasswordError = document.getElementById('characterPasswordError');
+            const enteredPassword = charPasswordInput.value.toUpperCase();
+
+            // Hide any previously revealed cards
+            const allCharacterCards = document.querySelectorAll('#characterCardsContainer > div');
+            allCharacterCards.forEach(card => {
+                card.classList.add('hidden-clue');
+            });
+
+            let cardUnlocked = false;
+            for (const password in characterPasswords) {
+                if (enteredPassword === password) {
+                    const cardId = characterPasswords[password];
+                    document.getElementById(cardId).classList.remove('hidden-clue');
+                    charPasswordError.classList.add('hidden-clue'); // Hide error if successful
+                    charPasswordInput.value = ''; // Clear input
+                    cardUnlocked = true;
+                    break; // Stop after finding the correct card
+                }
+            }
+
+            if (!cardUnlocked) {
+                charPasswordError.classList.remove('hidden-clue'); // Show error
             }
         };
     </script>
