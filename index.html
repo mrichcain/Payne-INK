@@ -44,6 +44,14 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Specific style for guestbook entries to enable scrolling */
+        #guestbookEntries {
+            max-height: 300px; /* Adjust as needed to show approx 5 entries */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border-top: 1px solid #333; /* A subtle separator */
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -95,7 +103,7 @@
             <ul class="list-disc list-inside text-lg text-gray-300 space-y-2 px-4 md:px-0">
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live Tattoo Design Contest (Guest Judge: Tatiana Vale!)</li>
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Blacklight Ink Demos <span class="text-sm text-gray-400">(with Zak "The Shop Heartthrob")</span></li>
-                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live DJ spinning beats all night <span class="text-sm text-gray-400">(with Melissa "The Rhythmic Regulator")</span></li>
+                <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Live DJ spinning beats all night <span class="text-sm text-gray-400">(with Nairoobi "The Rhythmic Regulator")</span></li>
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Piercing Booths & Custom Flash Art <span class="text-sm text-gray-400">(run by Nate "The Steady Hand")</span></li>
                 <li class="bg-gray-700 p-2 rounded-lg shadow-inner">Delicious Snacks & Refreshments</li>
             </ul>
@@ -189,8 +197,8 @@
                     <p class="text-lg text-gray-300 mb-1">**Role:** Young Apprentice at Payne Ink, Aspiring Designer</p>
                     <p class="text-lg text-gray-300 mb-1">**Personality:** Eager to please, talented, but easily overwhelmed by pressure and desperate for recognition. She once idolized Tatiana Vale and wants nothing more than to be a successful artist.</p>
                     <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Tatiana had discovered Lilly submitted a stolen design in a *previous* contest and was planning to expose her during the party. This would have irrevocably ruined Lilly's career.</p>
-                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She's acutely aware of the heightened scrutiny on originality in the contest, partly due to the recent public feuds initiated by **Miranda "The Vlogging Victim"** over design ownership, which added immensely to Lilly's stress.</p>
-                    <p class="text-lg text-gray-300 mb-4">**Secret/Motive Hint:** She was desperate to avoid exposure and saw Tatiana as a direct, immediate threat to her entire future in the tattoo world. Her panic led to a tragic, unintended outcome.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She's acutely aware of the heightened scrutiny on originality in the contest, partly due to the recent public feuds initiated by **Miranda "The Vlogging Victim"** over design ownership, which added immensely to Lilly's stress. **Crucially, she was secretly paid a substantial sum by Liz "The Confidential Canvas" to ensure Tatiana would not make her planned announcement, by any means necessary. Liz hinted that Tatiana's exposure would "hurt everyone involved."**</p>
+                    <p class="text-lg text-gray-300 mb-4">**Secret/Motive Hint:** She was desperate to avoid exposure, saw Tatiana as a direct threat, and was offered a financial incentive by an external force (Liz) to silence her. Her panic, combined with the illicit payment and Liz's veiled threats about Tatiana's broader impact, led to a tragic, unintended outcome.</p>
                     <div class="p-3 bg-gray-800 rounded-lg text-sm text-gray-400 border border-gray-600">
                         <span class="font-bold text-teal-300">Pre-Game Task:</span> Go to the Guestbook and post a message as "Lilly" expressing **immense excitement for the contest** and how much she **admires Tatiana Vale.** Be slightly over-the-top in your praise.
                     </div>
@@ -200,7 +208,7 @@
                 <div id="card_Aaliyah" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
                     <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Aaliyah "The Crocheting Critic"</h4>
                     <p class="text-lg text-gray-300 mb-1">**Role:** Party Guest, Aspiring Craft Influencer</p>
-                    <p class="text-lg text-gray-300 mb-1">**Personality:** Enthusiastic about her unique craft-art, particularly crochet, but also a bit self-conscious and sensitive to criticism. She dreams of gaining wider recognition for her blend of traditional crafts and modern art.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Personality:** Enthusiastic about her unique craft-art, particularly crochet, but also a bit self-conscious and sensitive to criticism. She dreams of gaining wider recognition for her blend of traditional crafts and modern art.
                     <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Aaliyah follows Tatiana's work closely, hoping for a chance to gain exposure for her unique craft-art on the Inkspire Network. She views Tatiana as a gatekeeper to success but also fears her sharp critiques.</p>
                     <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She's quietly resentful of **Kailey "The Birthday Artist's"** instant popularity and "flashy" style, feeling her own more nuanced art is overlooked by the mainstream tattoo world.</p>
                     <p class="text-lg text-gray-300 mb-4">**Secret/Motive Hint:** Was Aaliyah seeking to manipulate Tatiana's opinion for her own gain, or did a fear of negative judgment lead her to a desperate act?</p>
@@ -241,7 +249,7 @@
                     <p class="text-lg text-gray-300 mb-1">**Role:** Security Guard Hired for the Party</p>
                     <p class="text-lg text-gray-300 mb-1">**Personality:** Stoic, by-the-book, and prides himself on his observational skills. However, he can sometimes be a little too detached, focusing on procedures over people and missing subtle human elements.</p>
                     <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** His primary job was to ensure Tatiana's safety and the smooth running of the event. Her death directly reflects poorly on his professionalism and vigilance, and he fears repercussions.</p>
-                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He had a minor but noticeable disagreement with **Melissa "The Rhythmic Regulator"** earlier, as the loud music from the DJ booth made it difficult for him to monitor the entrance to the ink room effectively.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Others:** He had a minor but noticeable disagreement with **Nairoobi "The Rhythmic Regulator"** earlier, as the loud music from the DJ booth made it difficult for him to monitor the entrance to the ink room effectively.</p>
                     <p class="text-lg text-gray-300 mb-4">**Secret/Motive Hint:** Was Carter truly oblivious to the murder, or is he deliberately hiding something about what he saw (or didn't see) that night to protect his reputation, or even to cover for someone else's oversight?</p>
                     <div class="p-3 bg-gray-800 rounded-lg text-sm text-gray-400 border border-gray-600">
                         <span class="font-bold text-teal-300">Pre-Game Task:</span> Go to the Guestbook and post a brief, formal message as "Carter" about **ensuring a safe and orderly event.** Maybe mention the importance of **clear lines of sight.**
@@ -300,16 +308,16 @@
                     </div>
                 </div>
 
-                <!-- Melissa's Card -->
-                <div id="card_Melissa" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
-                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Melissa "The Rhythmic Regulator"</h4>
+                <!-- Nairoobi's Card -->
+                <div id="card_Nairoobi" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-yellow-500 mb-6">
+                    <h4 class="text-xl md:text-2xl font-semibold text-yellow-300 mb-2">Character Card: Nairoobi "The Rhythmic Regulator"</h4>
                     <p class="text-lg text-gray-300 mb-1">**Role:** Studio Manager at Payne Ink & Party DJ</p>
                     <p class="text-lg text-gray-300 mb-1">**Personality:** Highly organized and detail-oriented, she keeps the studio running smoothly. On the side, she's a passionate DJ, bringing her organized nature to managing the music and observing the crowd from the booth.</p>
-                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Melissa was extremely anxious about Tatiana's visit, not just for the contest, but because she knew Tatiana's reputation for deep dives into shop operations. Melissa had recently discovered a significant, unexplained discrepancy in the **solvent cleaner** inventory – a large amount is missing – and she was terrified Tatiana would uncover this irregularity, making her look incompetent or worse. Her role as DJ meant she had access to the ink room for a moment during a track change and could have slipped in undetected.</p>
+                    <p class="text-lg text-gray-300 mb-1">**Connection to Victim (Tatiana Vale):** Nairoobi was extremely anxious about Tatiana's visit, not just for the contest, but because she knew Tatiana's reputation for deep dives into shop operations. Nairoobi had recently discovered a significant, unexplained discrepancy in the **solvent cleaner** inventory – a large amount is missing – and she was terrified Tatiana would uncover this irregularity, making her look incompetent or worse. Her role as DJ meant she had access to the ink room for a moment during a track change and could have slipped in undetected.</p>
                     <p class="text-lg text-gray-300 mb-1">**Connection to Others:** She had a small but public squabble with **Carter "The Silent Security"** about the volume of the music interfering with his ability to monitor the ink room, making her frustrated.</p>
-                    <p class="text-lg text-gray-300 mb-4">**Secret/Motive Hint:** Was Melissa desperate to prevent Tatiana from exposing the missing solvent, which could have been linked to illicit activities or simply made her look grossly negligent? Her access and the timing of the murder are highly suspicious.</p>
+                    <p class="text-lg text-gray-300 mb-4">**Secret/Motive Hint:** Was Nairoobi desperate to prevent Tatiana from exposing the missing solvent, which could have been linked to illicit activities or simply made her look grossly negligent? Her access and the timing of the murder are highly suspicious.</p>
                     <div class="p-3 bg-gray-800 rounded-lg text-sm text-gray-400 border border-gray-600">
-                        <span class="font-bold text-teal-300">Pre-Game Task:</span> Go to the Guestbook and post a message as "Melissa" about **hoping everything runs perfectly tonight** and that you're **"keeping a close eye on all the moving parts, even the inventory!"**
+                        <span class="font-bold text-teal-300">Pre-Game Task:</span> Go to the Guestbook and post a message as "Nairoobi" about **hoping everything runs perfectly tonight** and that you're **"keeping a close eye on all the moving parts, even the inventory!"**
                     </div>
                 </div>
 
@@ -409,6 +417,10 @@
                         <li class="bg-gray-800 p-3 rounded-md border-l-4 border-red-500">
                             <span class="font-semibold text-red-300">Anonymous Observation:</span> "Tatiana Vale is ruthless. I heard she's already found someone here who's been passing off stolen work as their own. She prides herself on 'unmasking' fakes. It's only a matter of time before she makes a big announcement. Hope it doesn't sink the shop."
                         </li>
+                        <!-- NEW HIDDEN CLUE 3.4: Encrypted Chat Snippet (Lilly & Liz) -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-green-500">
+                            <span class="font-semibold text-green-300">Encrypted Chat Snippet:</span> <span class="text-sm italic text-gray-400">"[Encrypted Chat Log - Dated recently]<br>Liz: ...confirming our arrangement. Payment transferred. Ensure the 'project' proceeds discreetly before the announcement.<br>Lilly: Funds received. Tatiana won't be a problem. Consider it handled."</span>
+                        </li>
                     </ul>
                 </div>
                 <p id="passwordError" class="text-red-500 mt-4 hidden-clue">Incorrect password. Please try again.</p>
@@ -471,7 +483,7 @@
             "PULSE": "card_Zak",
             "VEIL": "card_Anne",
             "RISE": "card_Lilly",
-            "MIKUMIKUBEAM": "card_Aaliyah", // Updated Aaliyah's password
+            "MIKUMIKUBEAM": "card_Aaliyah",
             "TRACE": "card_Lucas",
             "PROFIT": "card_James",
             "WATCH": "card_Carter",
@@ -479,7 +491,7 @@
             "FAME": "card_Miranda",
             "CHARM": "card_Dante",
             "CALM": "card_Nate",
-            "BEATS": "card_Melissa"
+            "BEATS": "card_Nairoobi"
         };
 
 
