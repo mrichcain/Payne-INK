@@ -467,19 +467,19 @@
 
         // Character Card Passwords (Internal to the script)
         const characterPasswords = {
-            "KAILEY": "card_Kailey",
-            "ZAK": "card_Zak",
-            "ANNE": "card_Anne",
-            "LILLY": "card_Lilly",
+            "STAR": "card_Kailey",
+            "PULSE": "card_Zak",
+            "VEIL": "card_Anne",
+            "RISE": "card_Lilly",
             "MIKUMIKUBEAM": "card_Aaliyah", // Updated Aaliyah's password
-            "LUCAS": "card_Lucas",
-            "JAMES": "card_James",
-            "CARTER": "card_Carter",
-            "DONOVAN": "card_Donovan",
-            "MIRANDA": "card_Miranda",
-            "DANTE": "card_Dante",
-            "NATE": "card_Nate",
-            "MELISSA": "card_Melissa"
+            "TRACE": "card_Lucas",
+            "PROFIT": "card_James",
+            "WATCH": "card_Carter",
+            "GLOVES": "card_Donovan",
+            "FAME": "card_Miranda",
+            "CHARM": "card_Dante",
+            "CALM": "card_Nate",
+            "BEATS": "card_Melissa"
         };
 
 
@@ -773,7 +773,8 @@
         window.unlockCharacterCard = function() {
             const charPasswordInput = document.getElementById('characterPasswordInput');
             const charPasswordError = document.getElementById('characterPasswordError');
-            const enteredPassword = charPasswordInput.value.toUpperCase();
+            // Trim any whitespace and convert to uppercase for consistent comparison
+            const enteredPassword = charPasswordInput.value.trim().toUpperCase();
 
             // Hide any previously revealed cards
             const allCharacterCards = document.querySelectorAll('#characterCardsContainer > div');
@@ -782,9 +783,10 @@
             });
 
             let cardUnlocked = false;
-            for (const password in characterPasswords) {
-                if (enteredPassword === password) {
-                    const cardId = characterPasswords[password];
+            // Iterate through the object using Object.keys() to get the password strings
+            for (const passwordKey in characterPasswords) {
+                if (enteredPassword === passwordKey) { // Compare entered password with the password key
+                    const cardId = characterPasswords[passwordKey]; // Get the element ID using the password key
                     document.getElementById(cardId).classList.remove('hidden-clue');
                     charPasswordError.classList.add('hidden-clue'); // Hide error if successful
                     charPasswordInput.value = ''; // Clear input
