@@ -110,4 +110,261 @@
         </section>
 
         <!-- New: Contest & Awards Section -->
-        <section class="mb-10 text-cen
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Contest & Awards Info!</h3>
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-purple-500">
+                <p class="text-lg text-gray-300 mb-4">
+                    Get ready to show off your creativity and flair!
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-300 space-y-3 px-4 md:px-0">
+                    <li class="p-2 rounded-lg shadow-inner bg-gray-800">
+                        <span class="font-semibold text-purple-300">Best Tattoo Design:</span> Bring your *original* tattoo design! It will be put up for a vote by all party-goers. The most innovative and captivating design wins!
+                    </li>
+                    <li class="p-2 rounded-lg shadow-inner bg-gray-800">
+                        <span class="font-semibold text-purple-300">Best Costume:</span> Come dressed to impress in your most flashy, fun, and ink-ready attire. Your fellow guests will vote for the most outstanding costume of the night!
+                    </li>
+                    <li class="p-2 rounded-lg shadow-inner bg-gray-800">
+                        <span class="font-semibold text-purple-300">Best Actor:</span> Show off your improv skills! The player who embodies their character most convincingly throughout the mystery will be crowned Best Actor.
+                    </li>
+                </ul>
+                <p class="text-lg text-red-300 font-bold mt-4">
+                    **Mystery Solvers Reward:** The player(s) who correctly identify the killer and motive will split a **$100 prize!**
+                </p>
+                <p class="text-lg text-gray-300 mt-4">
+                    Votes will be cast towards the end of the night. Good luck, and bring your A-game!
+                </p>
+            </div>
+        </section>
+
+        <!-- Player Character Cards Section (New) -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Your Character Card</h3>
+            <p class="text-lg text-gray-300 mb-4">
+                Enter your unique character password to reveal your role and secrets.
+            </p>
+            <div class="flex flex-col items-center">
+                <input type="password" id="characterPasswordInput" placeholder="Your Character Password"
+                       class="px-4 py-2 mb-4 rounded-lg bg-gray-700 text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 w-full max-w-xs">
+                <button onclick="unlockCharacterCard()"
+                        class="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105">
+                    Reveal My Card
+                </button>
+            </div>
+            <p id="characterPasswordError" class="text-red-500 mt-4 hidden-clue">Incorrect password for any character. Please try again.</p>
+
+            <!-- Individual Character Cards - Initially Hidden -->
+            <div id="characterCardsContainer" class="mt-8 text-left">
+                <!-- Character cards will be dynamically inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Special Message / Hidden Clue Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">A Note From the Birthday Stars!</h3>
+            <!-- Placeholder for before game start -->
+            <div id="specialMessagePlaceholder" class="p-6 rounded-lg bg-gray-700 text-purple-300 text-lg">
+                Clues available at game start.
+            </div>
+            <!-- Actual content, initially hidden -->
+            <div id="specialMessageActualContent" class="initial-hidden">
+                <p class="text-lg text-gray-300 mb-6 bg-gray-700 p-6 rounded-lg shadow-inner cursor-pointer hover:bg-gray-600 transition duration-300 ease-in-out" onclick="toggleClue('specialMessageClue')">
+                    Click here for a special message from Kailey & Zak!
+                </p>
+                <div id="specialMessageClue" class="hidden-clue bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-purple-500">
+                    <p class="text-xl text-white font-medium mb-4">
+                        "Hey everyone! So excited you're here. We've poured our hearts into this party, especially the contest. Just a little heads-up though, we heard a rumor about some tension around previous design submissions... hopefully, it's nothing to worry about. Let's just focus on celebrating and having a good time!"
+                    </p>
+                    <!-- HIDDEN CLUE 1: Reference to "previous design submissions" hinting at plagiarism -->
+                    <p class="text-sm text-gray-400">
+                        <span class="font-bold text-red-400">Hidden Insight:</span> *The buzz around the shop has been intense. Someone mentioned seeing a familiar phoenix design from the 'Rising Stars' 2022 contest pop up again recently. Odd, right?*
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guestbook Section - Now interactive immediately, but with hidden clue -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Party Guestbook</h3>
+            <div id="guestbookContent" class="bg-gray-700 p-6 rounded-lg shadow-lg border-2 border-cyan-500 text-left">
+                <div id="authStatus" class="text-sm text-gray-400 mb-4">
+                    Authenticating... <span class="loader"></span>
+                </div>
+                <div class="mb-6 p-4 bg-gray-800 rounded-md">
+                    <p class="text-xl text-white font-medium mb-4">Leave a message:</p>
+                    <input type="text" id="guestbookName" placeholder="Your Name" tabindex="0" disabled
+                           class="w-full px-4 py-2 mb-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400" maxlength="50">
+                    <textarea id="guestbookMessage" placeholder="Your message..." rows="4" tabindex="0" disabled
+                              class="w-full px-4 py-2 mb-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400" maxlength="200"></textarea>
+                    <button onclick="addGuestbookEntry()" id="signButton" disabled
+                            class="w-full px-6 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-lg hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Sign Guestbook <span id="signLoader" class="hidden loader"></span>
+                    </button>
+                    <p id="guestbookMessageStatus" class="text-sm mt-2 hidden-clue"></p>
+                </div>
+
+                <p class="text-xl text-white font-medium mb-4">Recent Entries:</p>
+                <ul id="guestbookEntries" class="text-left text-gray-300 space-y-3">
+                    <!-- Guestbook entries will be loaded here dynamically from Firestore -->
+                    <!-- HIDDEN CLUE 2: Donovan's partial recollection hinting at the gloved person - now with initial-hidden -->
+                    <li id="donovanClue" class="bg-gray-800 p-3 rounded-md border-l-4 border-red-500 initial-hidden">
+                        <span class="font-semibold text-red-300">Hidden Entry:</span> <span class="text-sm italic text-gray-400">"Just a brief moment, but I distinctly saw a pair of gloved hands near the ink supplies before Tatiana arrived. Very quick."</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Password Protected Clue Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-teal-300 mb-4">Secret Artist's Archive</h3>
+            <!-- Placeholder for before game start -->
+            <div id="secretArchivePlaceholder" class="p-6 rounded-lg bg-gray-700 text-yellow-300 text-lg">
+                Access to the archive is granted at game start.
+            </div>
+            <!-- Actual content, initially hidden -->
+            <div id="secretArchiveActualContent" class="initial-hidden">
+                <p class="text-lg text-gray-300 mb-4">
+                    Enter the password found within the barcode on the Studio Access Card (Physical Clue 9) to access some deeply buried studio notes.
+                </p>
+                <div class="flex flex-col items-center">
+                    <input type="password" id="passwordInput" placeholder="Enter password"
+                           class="px-4 py-2 mb-4 rounded-lg bg-gray-700 text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 w-full max-w-xs">
+                    <button onclick="checkPassword()"
+                            class="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Unlock Archive
+                    </button>
+                </div>
+                <div id="secretClue" class="hidden-clue bg-gray-700 p-6 mt-6 rounded-lg shadow-lg border-2 border-yellow-500 text-left">
+                    <p class="text-xl text-white font-medium mb-4">Archived Studio Notes & Personal Observations:</p>
+                    <ul class="list-disc list-inside text-lg text-gray-300 space-y-3 pl-4">
+                        <!-- HIDDEN CLUE 3.1: Solvent Note -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-yellow-500">
+                            <span class="font-semibold text-yellow-300">Studio Policy (circa 2024):</span> "Reminder to staff: Always ensure the ink room's *solvent cleaner* is securely locked away. It's potent and, if misused, could cause severe damage to equipment... or worse, to health. We keep a large supply in the back cabinet."
+                            <p class="text-sm italic text-gray-400 mt-2">
+                                Confidential Remark: *Some of the newer apprentices don't seem to grasp just how dangerous certain chemicals can be if mixed improperly. Needs stricter oversight.*
+                            </p>
+                        </li>
+                        <!-- HIDDEN CLUE 3.2: Lilly's struggle/mentor's observation -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-orange-500">
+                            <span class="font-semibold text-orange-300">Mentor's Note (Recent):</span> "Lilly's been under a lot of pressure lately. Her initial designs were great, but she hit a wall on her contest piece. Then, suddenly, she had this *perfect* phoenix. Too perfect, almost. I hope she's not letting the pressure get to her in unhealthy ways."
+                        </li>
+                        <!-- HIDDEN CLUE 3.3: Tatiana's exposé methods -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-red-500">
+                            <span class="font-semibold text-red-300">Anonymous Observation:</span> "Tatiana Vale is ruthless. I heard she's already found someone here who's been passing off stolen work as their own. She prides herself on 'unmasking' fakes. It's only a matter of time before she makes a big announcement. Hope it doesn't sink the shop."
+                        </li>
+                        <!-- NEW HIDDEN CLUE 3.4: Encrypted Chat Snippet (Lilly & Liz) -->
+                        <li class="bg-gray-800 p-3 rounded-md border-l-4 border-green-500">
+                            <span class="font-semibold text-green-300">Encrypted Chat Snippet:</span> <span class="text-sm italic text-gray-400">"[Encrypted Chat Log - Dated recently]<br>Liz: ...confirming our arrangement. Payment transferred. Ensure the 'project' proceeds discreetly before the announcement.<br>Lilly: Funds received. Tatiana won't be a problem. Consider it handled."</span>
+                        </li>
+                    </ul>
+                </div>
+                <p id="passwordError" class="text-red-500 mt-4 hidden-clue">Incorrect password. Please try again.</p>
+            </div>
+        </section>
+
+        <!-- Game Master Bypass Section -->
+        <section class="mb-10 text-center">
+            <h3 class="text-2xl md:text-3xl font-bold text-red-400 mb-4">Game Master Bypass</h3>
+            <p class="text-lg text-gray-300 mb-4">
+                Game Masters: Enter code to reveal clues early.
+            </p>
+            <div class="flex flex-col items-center">
+                <input type="password" id="gmPasswordInput" placeholder="GM Code"
+                       class="px-4 py-2 mb-4 rounded-lg bg-gray-700 text-white border border-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 w-full max-w-xs">
+                <button onclick="checkGameMasterPassword()"
+                        class="px-6 py-3 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                    Reveal Clues (GM Only)
+                </button>
+            </div>
+            <p id="gmPasswordError" class="text-red-500 mt-4 hidden-clue">Incorrect GM code.</p>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm mt-8">
+            &copy; 2025 Payne Ink. All rights reserved. Let the ink flow!
+        </footer>
+    </div>
+
+    <!-- Firebase SDK Imports -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables for Firebase instances and user info
+        let app;
+        let db;
+        let auth;
+        let currentUserId = 'anonymous'; // Default to anonymous
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyChmZqtLFuQxjIGr1GTegKvEnCd9Vb-Bh8",
+          authDomain: "payneinkparty.firebaseapp.com",
+          projectId: "payneinkparty",
+          storageBucket: "payneinkparty.firebasestorage.app",
+          messagingSenderId: "342987145129",
+          appId: "1:342987145129:web:032c93d9a24fd3b7140eb8"
+        };
+        // For GitHub Pages, `appId` will be the project ID from your firebaseConfig.
+        const appId = firebaseConfig.projectId;
+        // No initial token needed, signInAnonymously will handle it for public access.
+        const initialAuthToken = null;
+
+        // Character Card Passwords (Internal to the script)
+        const characterPasswords = {
+            "STAR": "card_Kailey",
+            "PULSE": "card_Zak",
+            "VEIL": "card_Anne",
+            "RISE": "card_Lilly",
+            "MIKUMIKUBEAM": "card_Aaliyah",
+            "TRACE": "card_Lucas",
+            "PROFIT": "card_James",
+            "WATCH": "card_Carter",
+            "GLOVES": "card_Donovan",
+            "FAME": "card_Miranda",
+            "BEATS": "card_Anthony"
+        };
+
+        // Character card data extracted from the markdown immersive
+        const characterData = [
+            {
+                id: "card_Kailey",
+                name: "Kailey \"The Birthday Artist\"",
+                role: "Co-Birthday Celebrant, Aspiring Tattoo Artist",
+                personality: "Enthusiastic, creative, a bit competitive. Deeply passionate about her art. She seeks genuine artistic recognition and despises unoriginality.",
+                connection: "As a young artist, Kailey greatly admires Tatiana Vale and wants nothing more than to impress her with her original contest design. She hoped Tatiana's visit would be a huge break.",
+                mustShare: "I saw **Anne** looking incredibly stressed earlier, having a hushed conversation with someone about a 'secret from the past' that could 'ruin everything.' She seemed really agitated.",
+                canShare: "Sometimes I feel like my genuine artistry gets overlooked because everyone's so focused on loud personalities or flashy techniques, like **Zak's** blacklight demos.",
+                motiveHint: "Did she resent Tatiana's potential overlooking of her truly original work, or was she worried about *any* accusations of plagiarism (real or perceived) disrupting her big night, especially with Tatiana's reputation?",
+                preGameTask: "Go to the Guestbook and post a message as 'Kailey' about your **excitement for the design contest** and a subtle hint about **hoping everyone's work is truly original.**"
+            },
+            {
+                id: "card_Zak",
+                name: "Zak \"The Shop Heartthrob\"",
+                role: "Co-Birthday Celebrant, Tattoo Artist at Payne Ink, Blacklight Ink Demonstrator",
+                personality: "Charismatic, a little rebellious, but fiercely protective of his friends and the shop's reputation. He carries a relaxed demeanor, but has a hidden past of shady dealings in the tattoo world.",
+                connection: "Tatiana was known for exposing 'rats' and shady dealings in shops, and Zak has some skeletons in his closet regarding past questionable ink supply sources that he's tried to put behind him. He feared Tatiana might dig them up.",
+                mustShare: "**Anthony** approached me earlier, quite worried about some missing solvent supplies. He asked me to help him track them down, but I haven't had a chance yet.",
+                canShare: "I saw **Lucas** tinkering with a device near the ink room, looking very focused, almost like he was trying to hack something.",
+                motiveHint: "What past secret was Zak trying to keep hidden from the public eye and Tatiana's scrutinizing gaze? Would he go to great lengths to prevent its exposure, especially if it involved his business partner or mentor?",
+                preGameTask: "Go to the Guestbook and post a message as 'Zak' about being **pumped for the blacklight demos** and a subtle remark about **tonight being about clean reputations and good vibes.**"
+            },
+            {
+                id: "card_Anne",
+                name: "Anne \"The Shadowed Ink\"",
+                role: "Longtime Friend of Kailey's, Tattoo Apprentice",
+                personality: "Quiet, observant, but fiercely protective of her professional reputation. She prefers to keep a low profile but can be surprisingly passionate when provoked.",
+                connection: "Anne is well aware of Tatiana's investigative nature and fears she might uncover details about Anne's previous apprenticeships at other, less reputable shops, potentially impacting her current standing at Payne Ink.",
+                mustShare: "I had a tense conversation with **James** about the studio's budget. He's been pushing for cuts that directly impact the quality of apprentice supplies, and it's making my work harder.",
+                canShare: "I overheard **Aaliyah** muttering to herself earlier about how 'some critics just don't understand true craft or genuine effort.'",
+                motiveHint: "What truly happened at Anne's previous shop that she's so desperate to keep hidden, and was she worried Tatiana would pick up on the scent through her investigations into local artists?",
+                preGameTask: "Go to the Guestbook and post a message as 'Anne' about **hoping for a drama-free night** and that everyone should **focus on the art, not past rumors.**"
+            },
+            {
+                id: "card_Lilly",
+                name: "Lilly \"The Phoenix Plagiarist\"",
+                role: "Young Apprentice at Payne Ink, Aspiring Designer",
+                personality: "Eager to please, talented, but easily overwhelmed by pressure and desperate for recognition. She once idolized Tatiana Vale and wants nothing more than to be a successful artist.",
+                connection: "Tatiana had discovered Lilly submitted a stolen design in a *previous* contest and was planning to expose her during the party. This would have irrevocably ruined Lilly's career.",
+                mustShare: "I heard whispers that Tatiana was about to make a huge, career-ending announcement that would affect some
